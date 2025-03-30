@@ -13,7 +13,7 @@ class KtorRemoteDataSource @Inject constructor(
 
     companion object {
         private const val BASE_URL = "https://api.openweathermap.org/data/2.5"
-        private const val API_KEY = "af4bacaf94791ad5b3d9de7ce60d3261"
+        private const val API_KEY = "APIKEY"
     }
 
     override suspend fun getWeatherDataResponse(lat: Float, lng: Float): WeatherDataResponse {
