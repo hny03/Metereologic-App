@@ -113,6 +113,14 @@ fun WeatherScreenPreview() {
                 temperature = 32,
                 dayOfWeek = "Saturday",
                 isDay = true,
+                feelsLike = TODO(),
+                windSpeed = TODO(),
+                windDirection = TODO(),
+                sunriseTime = TODO(),
+                sunsetTime = TODO(),
+                visibilityMeters = TODO(),
+                forecasts = TODO(),
+                coord = TODO(),
             )
         )
     }

@@ -1,6 +1,6 @@
 package com.example.metereologic_app.data.di
 
-import com.example.metereologic_app.data.KtorRemoteDataSource
+import com.example.metereologic_app.data.remote.KtorRemoteDataSource
 import com.example.metereologic_app.data.remote.RemoteDataSource
 import dagger.Binds
 import dagger.Module
