@@ -1,3 +1,5 @@
+@file:Suppress("UNREACHABLE_CODE")
+
 package com.example.metereologic_app.ui.feature
 
 import android.annotation.SuppressLint
@@ -98,30 +100,5 @@ fun WeatherScreen(
                 )
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun WeatherScreenPreview() {
-    MetereologicAppTheme {
-        WeatherScreen(
-            weatherInfo = WeatherInfo(
-                locationName = "Belo Horizonte",
-                conditionIcon = "01d",
-                condition = "Cloudy",
-                temperature = 32,
-                dayOfWeek = "Saturday",
-                isDay = true,
-                feelsLike = TODO(),
-                windSpeed = TODO(),
-                windDirection = TODO(),
-                sunriseTime = TODO(),
-                sunsetTime = TODO(),
-                visibilityMeters = TODO(),
-                forecasts = TODO(),
-                coord = TODO(),
-            )
-        )
     }
 }

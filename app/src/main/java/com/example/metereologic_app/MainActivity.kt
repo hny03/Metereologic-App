@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.metereologic_app.ui.feature.WeatherRoute
+import com.example.metereologic_app.ui.mainscreen.MainRoute
 import com.example.metereologic_app.ui.theme.MetereologicAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MetereologicAppTheme {
-                WeatherRoute()
+                MainRoute()
             }
         }
     }

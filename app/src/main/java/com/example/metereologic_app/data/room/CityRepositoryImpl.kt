@@ -8,16 +8,13 @@ class CityRepositoryImpl(
 ) : CityRepository {
     override suspend fun insert(
         city: String,
-        country: String,
         id: Long?) {
         val entity = id?.let {
             cityDao.getBy(it)?.copy(
                 name = city,
-                country = country
             )
         } ?: CityEntity(
                 name = city,
-                country = country
         )
 
         cityDao.insert(entity)
@@ -33,19 +30,17 @@ class CityRepositoryImpl(
             entities.map { entity ->
                 City(
                     id = entity.id,
-                    name = entity.name,
-                    country = entity.country
+                    name = entity.name
                 )
             }
         }
     }
 
-    override suspend fun getByName(city: String, country: String): City? {
-        return cityDao.getByName(city, country)?.let { entity ->
+    override suspend fun getByName(city: String): City? {
+        return cityDao.getByName(city)?.let { entity ->
             City(
                 id = entity.id,
-                name = entity.name,
-                country = entity.country
+                name = entity.name
             )
         }
     }
@@ -54,8 +49,7 @@ class CityRepositoryImpl(
         return cityDao.getBy(id)?.let { entity ->
             City(
                 id = entity.id,
-                name = entity.name,
-                country = entity.country
+                name = entity.name
             )
         }
     }

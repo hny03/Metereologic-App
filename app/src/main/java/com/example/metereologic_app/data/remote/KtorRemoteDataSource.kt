@@ -13,10 +13,10 @@ class KtorRemoteDataSource @Inject constructor(
 
     companion object {
         private const val BASE_URL = "https://api.openweathermap.org/data/2.5"
-        private const val API_KEY = "APIKEY"
+        private const val API_KEY = "af4bacaf94791ad5b3d9de7ce60d3261"
     }
 
-    override suspend fun getWeatherDataResponse(lat: Float, lng: Float): WeatherDataResponse {
+    override suspend fun getWeatherDataResponse(lat: Double, lng: Double): WeatherDataResponse {
         return httpClient
             .get("$BASE_URL/weather?lat=$lat&lon=$lng&appid=$API_KEY&units=metric&lang=pt_br")
             .body()
@@ -28,17 +28,15 @@ class KtorRemoteDataSource @Inject constructor(
             .body()
     }
 
-    override suspend fun getForecastDataResponse(lat: Float, lng: Float): ForecastDataResponse {
+    override suspend fun getForecastDataResponse(lat: Double, lng: Double): ForecastDataResponse {
         return httpClient
-            .get("$BASE_URL/weather?lat=$lat&lon=$lng&appid=$API_KEY&units=metric&lang=pt_br")
+            .get("$BASE_URL/forecast?lat=$lat&lon=$lng&appid=$API_KEY&units=metric&lang=pt_br")
             .body()
     }
 
     override suspend fun getForecastByCity(city: String): ForecastDataResponse {
         return httpClient
-            .get("$BASE_URL/weather?q=$city&appid=$API_KEY&units=metric&lang=pt_br")
+            .get("$BASE_URL/forecast?q=$city&appid=$API_KEY&units=metric&lang=pt_br")
             .body()
     }
-
-    // Adicionar outra funçao suspend(colocar na interface q implementa tambem para o forecast
 }

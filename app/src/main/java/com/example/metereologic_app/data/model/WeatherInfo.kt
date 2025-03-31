@@ -20,29 +20,16 @@ data class WeatherInfo(
     val sunriseTime: Long,
     val sunsetTime: Long,
     val visibilityMeters: Int,
+    val humidity: Int,
+    val tempMin: Int,
+    val tempMax: Int,
     val forecasts: List<WeatherForecast>
 )
 
 @Serializable
 data class WeatherForecast(
-    val timestamp: Long,
     val dateTimeText: String,
-    val temperature: Double,
-    val feelsLike: Double,
-    val minTemp: Double,
-    val maxTemp: Double,
+    val temperature: Int,
     val condition: String,
     val conditionIcon: String,
-    val windSpeed: Double,
-    val windDirection: Int,
-    val visibility: Int,
-    val precipitationProbability: Double,
-    val rainfallVolume: Double,
-    val snowfallVolume: Double
-)
-
-@Serializable
-data class Coord(
-    val lon: Double,
-    val lat: Double
 )

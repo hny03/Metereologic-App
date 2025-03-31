@@ -5,89 +5,78 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ForecastDataResponse(
-    val statusCode: String? = null, // Tornar opcional
-    val statusMessage: String? = null, // Tornar opcional e ajustar o tipo
-    val count: Int? = null, // Tornar opcional
-    val forecastList: List<ForecastData>? = null, // Tornar opcional
-    val cityInfo: CityInfo? = null // Tornar opcional
+    val cod: String,
+    val message: Int,
+    val cnt: Int,
+    val list: List<WeatherData>,
+    val city: City
 )
 
 @Serializable
-data class ForecastData(
-    val timestamp: Long,
-    val temperatureData: TemperatureData,
-    val weatherConditions: List<WeatherCondition>,
-    val cloudCoverage: CloudCoverage,
-    val windData: WindData,
-    val visibilityMeters: Int,
-    val precipitationProbability: Double,
-    val rainfall: Rainfall? = null,
-    val snowfall: Snowfall? = null,
-    val systemData: SystemData,
-    @SerialName("dateTimeText") val dateTimeText: String
+data class WeatherData(
+    val dt: Long,
+    val main: MainWeather,
+    val weather: List<WeatherDescription>,
+    val clouds: Cloudsf,
+    val wind: Windf,
+    val visibility: Int,
+    val pop: Double,
+    val rain: Rainf? = null,
+    val sys: Sysf,
+    val dt_txt: String
 )
 
 @Serializable
-data class TemperatureData(
-    val currentTemp: Double,
-    @SerialName("feelsLike") val feelsLike: Double,
-    @SerialName("minTemp") val minTemp: Double,
-    @SerialName("maxTemp") val maxTemp: Double,
-    val atmosphericPressure: Int,
-    val humidityPercentage: Int,
-    @SerialName("seaLevelPressure") val seaLevelPressure: Int? = null,
-    @SerialName("groundLevelPressure") val groundLevelPressure: Int? = null
+data class MainWeather(
+    val temp: Double,
+    val feels_like: Double,
+    val temp_min: Double,
+    val temp_max: Double,
+    val pressure: Int,
+    val sea_level: Int,
+    val grnd_level: Int,
+    val humidity: Int,
+    val temp_kf: Double
 )
 
 @Serializable
-data class WeatherCondition(
-    val conditionId: Int,
-    val category: String,
+data class WeatherDescription(
+    val id: Int,
+    val main: String,
     val description: String,
-    val iconId: String
+    val icon: String
 )
 
 @Serializable
-data class CloudCoverage(
-    val percentage: Int
+data class Cloudsf(
+    val all: Int
 )
 
 @Serializable
-data class WindData(
-    val windSpeed: Double,
-    val windDirection: Int,
-    val windGust: Double? = null
+data class Windf(
+    val speed: Double,
+    val deg: Int,
+    val gust: Double
 )
 
 @Serializable
-data class Rainfall(
-    @SerialName("rainVolumeLast3h") val rainVolumeLast3h: Double? = null
+data class Rainf(
+    @SerialName("3h") val threeHour: Double
 )
 
 @Serializable
-data class Snowfall(
-    @SerialName("snowVolumeLast3h") val snowVolumeLast3h: Double? = null
+data class Sysf(
+    val pod: String
 )
 
 @Serializable
-data class SystemData(
-    val timeOfDay: String
-)
-
-@Serializable
-data class CityInfo(
-    val cityId: Long,
-    val cityName: String,
-    val coordinates: Coordinates,
-    val countryCode: String,
-    val populationSize: Int,
-    val utcOffset: Int,
-    val sunriseTime: Long,
-    val sunsetTime: Long
-)
-
-@Serializable
-data class Coordinates(
-    val latitude: Double,
-    val longitude: Double
+data class City(
+    val id: Int,
+    val name: String,
+    val coord: Coord,
+    val country: String,
+    val population: Int,
+    val timezone: Int,
+    val sunrise: Long,
+    val sunset: Long
 )

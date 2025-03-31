@@ -13,19 +13,32 @@ class WeatherRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : WeatherRepository {
 
-    override suspend fun getWeatherData(lat: Float, lng: Float): WeatherInfo {
+    override suspend fun getWeatherData(lat: Double, lng: Double): WeatherInfo {
         val responseWeather = remoteDataSource.getWeatherDataResponse(lat, lng)
         val weather = responseWeather.weather[0]
 
         val responseForecast = remoteDataSource.getForecastDataResponse(lat, lng)
+        val forecasts = responseForecast.list.map { weatherData ->
+            WeatherForecast(
+                dateTimeText = weatherData.dt_txt,
+                temperature = weatherData.main.temp.toInt(),
+                condition = weatherData.weather.firstOrNull()?.main ?: "Unknown",
+                conditionIcon = weatherData.weather.firstOrNull()?.icon ?: ""
+            )
+        }
+
+
 
         return WeatherInfo(
-            coord = responseWeather.coord,
+
             locationName = responseWeather.name,
             conditionIcon = weather.icon,
             condition = weather.main,
             temperature = responseWeather.main.temp.roundToInt(),
-            dayOfWeek = LocalDate.now().dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()),
+            dayOfWeek = LocalDate.now().dayOfWeek.getDisplayName(
+                TextStyle.FULL,
+                Locale.getDefault()
+            ),
             isDay = weather.icon.last() == 'd',
             feelsLike = responseWeather.main.feelsLike.roundToInt(),
             windSpeed = responseWeather.wind.speed,
@@ -33,25 +46,54 @@ class WeatherRepositoryImpl @Inject constructor(
             sunriseTime = responseWeather.sys?.sunrise ?: 0L,
             sunsetTime = responseWeather.sys?.sunset ?: 0L,
             visibilityMeters = responseWeather.visibility,
-            forecasts = responseForecast.forecastList?.map { forecast ->
-                WeatherForecast(
-                    timestamp = forecast.timestamp,
-                    dateTimeText = forecast.dateTimeText,
-                    temperature = forecast.temperatureData.currentTemp,
-                    feelsLike = forecast.temperatureData.feelsLike,
-                    minTemp = forecast.temperatureData.minTemp,
-                    maxTemp = forecast.temperatureData.maxTemp,
-                    condition = forecast.weatherConditions.firstOrNull()?.category ?: "Desconhecido",
-                    conditionIcon = forecast.weatherConditions.firstOrNull()?.iconId ?: "",
-                    windSpeed = forecast.windData.windSpeed,
-                    windDirection = forecast.windData.windDirection,
-                    visibility = forecast.visibilityMeters,
-                    precipitationProbability = forecast.precipitationProbability,
-                    rainfallVolume = forecast.rainfall?.rainVolumeLast3h ?: 0.0,
-                    snowfallVolume = forecast.snowfall?.snowVolumeLast3h ?: 0.0
-                )
-            } ?: emptyList()
-
+            coord = responseWeather.coord,
+            forecasts = forecasts,
+            humidity = responseWeather.main.humidity,
+            tempMin = responseWeather.main.tempMin.toInt(),
+            tempMax = responseWeather.main.tempMax.toInt()
         )
     }
+
+    override suspend fun getWeatherCity(city: String): WeatherInfo {
+        val responseWeather = remoteDataSource.getWeatherByCity(city)
+        val weather = responseWeather.weather[0]
+
+        val responseForecast = remoteDataSource.getForecastByCity(city)
+        val forecasts = responseForecast.list.map { weatherData ->
+            WeatherForecast(
+                dateTimeText = weatherData.dt_txt,
+                temperature = weatherData.main.temp.toInt(),
+                condition = weatherData.weather.firstOrNull()?.main ?: "Unknown",
+                conditionIcon = weatherData.weather.firstOrNull()?.icon ?: ""
+            )
+        }
+
+
+
+        return WeatherInfo(
+
+            locationName = responseWeather.name,
+            conditionIcon = weather.icon,
+            condition = weather.main,
+            temperature = responseWeather.main.temp.roundToInt(),
+            dayOfWeek = LocalDate.now().dayOfWeek.getDisplayName(
+                TextStyle.FULL,
+                Locale.getDefault()
+            ),
+            isDay = weather.icon.last() == 'd',
+            feelsLike = responseWeather.main.feelsLike.roundToInt(),
+            windSpeed = responseWeather.wind.speed,
+            windDirection = responseWeather.wind.deg,
+            sunriseTime = responseWeather.sys?.sunrise ?: 0L,
+            sunsetTime = responseWeather.sys?.sunset ?: 0L,
+            visibilityMeters = responseWeather.visibility,
+            coord = responseWeather.coord,
+            forecasts = forecasts,
+            humidity = responseWeather.main.humidity,
+            tempMin = responseWeather.main.tempMin.toInt(),
+            tempMax = responseWeather.main.tempMax.toInt()
+        )
+    }
+
+
 }

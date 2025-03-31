@@ -10,4 +10,19 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-val BlueSky = Color(0xFF4f9bd9)
+val BlueSky = Color(0xFF4F9BD9)
+val LightBlueSky = Color(0xFF64A8E0)
+val DarkBlueSky = Color(0xFF2F6FA3)
+
+val NightBlue = Color(0xFF1B3A5E)  // Azul escuro principal para noite
+val LightNightBlue = Color(0xFF2A4D7D)  // Azul noturno mais claro
+val DarkNightBlue = Color(0xFF10253D)  // Azul noturno mais escuro
+
+
+
+
+
+// UI
+val Purple = Color(0xFF59469d)
+val LightPurple = Color(0xFF643d67)
+val DarkPurple = Color(0xFF331866)

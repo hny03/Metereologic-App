@@ -16,9 +16,8 @@ interface CityDao {
     @Delete
     suspend fun delete(cityEntity: CityEntity)
 
-    @Query("SELECT * FROM cities WHERE name LIKE :city AND " +
-            "country LIKE :country LIMIT 1")
-    suspend fun getByName(city: String, country: String): CityEntity?
+    @Query("SELECT * FROM cities WHERE name LIKE :city LIMIT 1")
+    suspend fun getByName(city: String): CityEntity?
 
     @Query("SELECT * FROM cities")
     fun getAll(): Flow<List<CityEntity>>

@@ -26,7 +26,7 @@ class WeatherViewModel @Inject constructor(
     private fun getWeatherInfo() {
         viewModelScope.launch {
             // Mudar as coordenadas para o local do usuario
-            val weatherInfo = weatherRepository.getWeatherData(-19.912998f, -43.940933f)
+            val weatherInfo = weatherRepository.getWeatherData(-18.9186, -48.2772)
             _weatherInfoState.update {
                 it.copy(weatherInfo = weatherInfo)
             }
