@@ -95,42 +95,31 @@ fun MainScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     item {
-                        Row {
-                            OutlinedTextField(
-                                value = viewModel.city,
-                                onValueChange = { viewModel.onCityChange(it) },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                label = { Text("Digite a cidade") },
-                                placeholder = { Text("Ex: São Paulo, Nova York...") },
-                                leadingIcon = {
-                                    Icon(
-                                        Icons.Default.Search,
-                                        contentDescription = "Buscar"
-                                    )
-                                },
-                                singleLine = true,
-                                keyboardOptions = KeyboardOptions(
-                                    imeAction = ImeAction.Search
-                                ),
-                                shape = RoundedCornerShape(24.dp),
-                                colors = OutlinedTextFieldDefaults.colors(
-                                    focusedContainerColor = Color.White,
-                                    unfocusedContainerColor = Color.White,
-                                    disabledContainerColor = Color.White
+                        OutlinedTextField(
+                            value = "",
+                            onValueChange = {},
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            label = { Text("Digite a cidade") },
+                            placeholder = { Text("Ex: São Paulo, Nova York...") },
+                            leadingIcon = {
+                                Icon(
+                                    Icons.Default.Search,
+                                    contentDescription = "Buscar"
                                 )
+                            },
+                            singleLine = true,
+                            keyboardOptions = KeyboardOptions(
+                                imeAction = ImeAction.Search
+                            ),
+                            shape = RoundedCornerShape(24.dp),
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedContainerColor = Color.White,
+                                unfocusedContainerColor = Color.White,
+                                disabledContainerColor = Color.White
                             )
-
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            Button(
-                                onClick = { viewModel.getWeather() },
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text("Sus")
-                            }
-                        }
+                        )
                     }
                     item {
                         Text(

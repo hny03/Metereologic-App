@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.metereologic_app.data.repository.WeatherRepository
-import com.example.metereologic_app.data.room.GetWeatherUseCase
+// import com.example.metereologic_app.data.room.GetWeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,23 +18,23 @@ import javax.inject.Inject
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository,
-    private val getWeatherUseCase: GetWeatherUseCase
+//    private val getWeatherUseCase: GetWeatherUseCase
 ) : ViewModel() {
+    /*
+        var city by mutableStateOf("")
 
-    var city by mutableStateOf("")
+        fun onCityChange(newCity: String) {
+            city = newCity
+        }
 
-    fun onCityChange(newCity: String) {
-        city = newCity
-    }
-
-    fun getWeather() {
-        viewModelScope.launch {
-            if (city.isNotEmpty()) {
-                getWeatherUseCase.execute(city)
+        fun getWeather() {
+            viewModelScope.launch {
+                if (city.isNotEmpty()) {
+                    getWeatherUseCase.execute(city)
+                }
             }
         }
-    }
-
+    */
     private val _weatherInfoState = MutableStateFlow(WeatherInfoState())
     val weatherInfoState: StateFlow<WeatherInfoState> = _weatherInfoState.asStateFlow()
 

@@ -1,5 +1,6 @@
 package com.example.metereologic_app.data.room
 
+/*
 import android.util.Log
 import com.example.metereologic_app.data.repository.WeatherRepository
 import javax.inject.Inject
@@ -18,3 +19,4 @@ class GetWeatherUseCase @Inject constructor(
         }
     }
 }
+*/

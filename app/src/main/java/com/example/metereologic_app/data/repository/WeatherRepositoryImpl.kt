@@ -53,7 +53,7 @@ class WeatherRepositoryImpl @Inject constructor(
             tempMax = responseWeather.main.tempMax.toInt()
         )
     }
-
+/*
     override suspend fun getWeatherCity(city: String): WeatherInfo {
         val responseWeather = remoteDataSource.getWeatherByCity(city)
         val weather = responseWeather.weather[0]
@@ -94,6 +94,6 @@ class WeatherRepositoryImpl @Inject constructor(
             tempMax = responseWeather.main.tempMax.toInt()
         )
     }
-
+*/
 
 }

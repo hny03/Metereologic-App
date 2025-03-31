@@ -2,8 +2,6 @@ package com.example.metereologic_app.data.di
 
 import com.example.metereologic_app.data.repository.WeatherRepository
 import com.example.metereologic_app.data.repository.WeatherRepositoryImpl
-import com.example.metereologic_app.data.room.CityRepository
-import com.example.metereologic_app.data.room.CityRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,7 +13,9 @@ interface RepositoryModule {
 
     @Binds
     fun bindWeatherRepository(repository: WeatherRepositoryImpl): WeatherRepository
-
+/*
     @Binds
     fun bindCityRepository(cityRepository: CityRepositoryImpl): CityRepository
+
+*/
 }
