@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -65,7 +66,7 @@ fun MainRoute(
 ) {
     val weatherInfoState by viewModel.weatherInfoState.collectAsStateWithLifecycle()
 
-    MainScreen(weatherInfo = weatherInfoState.weatherInfo)
+    MainScreen(weatherInfo = weatherInfoState.weatherInfo, viewModel = viewModel)
 }
 
 
@@ -73,7 +74,8 @@ fun MainRoute(
 @Composable
 fun MainScreen(
     context: Context = LocalContext.current,
-    weatherInfo: WeatherInfo?
+    weatherInfo: WeatherInfo?,
+    viewModel: WeatherViewModel
 ) {
     weatherInfo?.let {
         Box(
@@ -93,31 +95,42 @@ fun MainScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     item {
-                        OutlinedTextField(
-                            value = "",
-                            onValueChange = { },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            label = { Text("Digite a cidade") },
-                            placeholder = { Text("Ex: São Paulo, Nova York...") },
-                            leadingIcon = {
-                                Icon(
-                                    Icons.Default.Search,
-                                    contentDescription = "Buscar"
+                        Row {
+                            OutlinedTextField(
+                                value = viewModel.city,
+                                onValueChange = { viewModel.onCityChange(it) },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                label = { Text("Digite a cidade") },
+                                placeholder = { Text("Ex: São Paulo, Nova York...") },
+                                leadingIcon = {
+                                    Icon(
+                                        Icons.Default.Search,
+                                        contentDescription = "Buscar"
+                                    )
+                                },
+                                singleLine = true,
+                                keyboardOptions = KeyboardOptions(
+                                    imeAction = ImeAction.Search
+                                ),
+                                shape = RoundedCornerShape(24.dp),
+                                colors = OutlinedTextFieldDefaults.colors(
+                                    focusedContainerColor = Color.White,
+                                    unfocusedContainerColor = Color.White,
+                                    disabledContainerColor = Color.White
                                 )
-                            },
-                            singleLine = true,
-                            keyboardOptions = KeyboardOptions(
-                                imeAction = ImeAction.Search
-                            ),
-                            shape = RoundedCornerShape(24.dp),
-                            colors = OutlinedTextFieldDefaults.colors(
-                                focusedContainerColor = Color.White,
-                                unfocusedContainerColor = Color.White,
-                                disabledContainerColor = Color.White
                             )
-                        )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Button(
+                                onClick = { viewModel.getWeather() },
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text("Sus")
+                            }
+                        }
                     }
                     item {
                         Text(

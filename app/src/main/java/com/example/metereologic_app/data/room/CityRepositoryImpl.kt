@@ -2,8 +2,9 @@ package com.example.metereologic_app.data.room
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class CityRepositoryImpl(
+class CityRepositoryImpl @Inject constructor(
     private val cityDao: CityDao
 ) : CityRepository {
     override suspend fun insert(
